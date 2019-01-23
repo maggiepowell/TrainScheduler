@@ -1,0 +1,10 @@
+.card {
+    width:80%;
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;    
+}
+
+#labels {
+    font-weight: bold;
+}
