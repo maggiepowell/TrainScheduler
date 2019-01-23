@@ -1,9 +1,14 @@
 //Initialize firebase
 var config = {
-
-};
-firebase.initializeApp(config);
-
+    apiKey: "AIzaSyDs33or62lC7_7oHEBRS1BfB1r8FtoxUtE",
+    authDomain: "train-scheduler-e63a0.firebaseapp.com",
+    databaseURL: "https://train-scheduler-e63a0.firebaseio.com",
+    projectId: "train-scheduler-e63a0",
+    storageBucket: "",
+    messagingSenderId: "420423212714"
+  };
+  firebase.initializeApp(config);
+  
 var database = firebase.database();
 
 //create an event handler for 'Submit' click
