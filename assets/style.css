@@ -1,4 +1,21 @@
+body {
+    background-color: black;
+    color: rgb(255, 208, 0);
+    font-family: 'Forum', cursive;
+    font-weight: bold;
+}
+
+.jumbotron{
+    background-image: url("images/red-flag-emblem-harry-potter-label-brand-663909-pxhere.com.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 370px;
+
+}
+
 .card {
+    color: rgba(177, 46, 6, 0.925);
     width:80%;
     margin: 0 auto;
     float: none;
