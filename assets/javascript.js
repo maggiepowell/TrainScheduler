@@ -8,7 +8,7 @@ var config = {
     messagingSenderId: "420423212714"
   };
   firebase.initializeApp(config);
-  
+
 var database = firebase.database();
 
 //create an event handler for 'Submit' click
@@ -17,13 +17,13 @@ $("#add-train-button").on("click", function(){
         name: $("#train-name-input")
             .val()
             .trim(),
-        role: $("#destination-input")
+        destination: $("#destination-input")
             .val()
             .trim(),
-        start: $("#firstTrain-input")
+        frequency: $("#firstTrain-input")
             .val()
             .trim(),
-        rate: $("#frequency-input")
+        minAway: $("#frequency-input")
             .val()
             .trim()
     }
@@ -33,3 +33,28 @@ $("#add-train-button").on("click", function(){
 database.ref().push(train);
 
 });
+
+//add train input to the schedule 
+function addTrainRow(train) {
+    var start = train.start;
+    console.log(start);
+    var nextArrival = moment().diff(moment(start),"minutes");
+    console.log(nextArrival);
+    var newRow = $("#tbody").append(
+        $("<td>").text(train.name),
+        $("<td>").text(train.destination),
+        $("<td>").text(train.frequency),
+        $("<td>").text(nextArrival),
+        $("<td>").text(train.minAway),
+    );
+      // Append the new row to the table
+    $("#employee-table > tbody").append(newRow);
+    };
+
+//The callback function you specify will be called for each child in the DB
+database.ref().on("child_added", function(snapshot) {
+    var train = snapshot.val();
+    console.log("child: ", train);
+    addEmployeeRow(train);
+});
+
