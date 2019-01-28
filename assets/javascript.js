@@ -4,7 +4,7 @@ var config = {
     authDomain: "train-scheduler-e63a0.firebaseapp.com",
     databaseURL: "https://train-scheduler-e63a0.firebaseio.com",
     projectId: "train-scheduler-e63a0",
-    storageBucket: "",
+    storageBucket: "train-scheduler-e63a0.appspot.com",
     messagingSenderId: "420423212714"
   };
   firebase.initializeApp(config);
@@ -29,8 +29,11 @@ $("#add-train-button").on("click", function(){
     }
     console.log(train);
 
-//push obj to database
-database.ref().push(train);
+    //push obj to database
+    database.ref().push(train)
+    .catch(function(err) {
+        console.log(err);
+    });
 
 });
 
@@ -48,13 +51,17 @@ function addTrainRow(train) {
         $("<td>").text(train.minAway),
     );
       // Append the new row to the table
-    $("#employee-table > tbody").append(newRow);
+    $("#train-table > tbody").append(newRow);
     };
 
 //The callback function you specify will be called for each child in the DB
 database.ref().on("child_added", function(snapshot) {
     var train = snapshot.val();
     console.log("child: ", train);
-    addEmployeeRow(train);
+    addTrainRow(train);
 });
 
+//calculate when next train will arrive relative to current time using moment.js
+var nextTrain = moment().endOf('day').fromNow();
+
+//next train time minus current time 
